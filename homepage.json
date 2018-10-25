@@ -1,0 +1,72 @@
+{
+  "sections" : [
+    {
+      "type" : "flagshipFullBanner",
+      "media" : "//digital.michaelkors.com/refreshes/2018/fall/refresh4/global/mobile/homepage/HP_PROMO_1.jpg",
+      "link" : "/women/_/N-28ee",
+      "title" : "DARK GLAMOUR",
+      "cta" : {
+        "label" : "SHOP MICHAEL MICHAEL KORS",
+        "className": "type-cta-1 wpCta"
+      },
+      "headline" : {
+        "label" : "DARK GLAMOUR",
+        "className" : "type-headline-mmk-1 wpHeadline type-padding-bottom"
+      }
+    },
+    {
+      "type" : "flagshipFullBanner",
+      "media" : "//digital1.michaelkors.com/refreshes/2018/fall/refresh4/global/mobile/homepage/HP_PROMO_2.jpg",
+      "link" : "/collection/_/N-3wie47",
+      "title" : "PATTERN PLAY",
+      "cta" : {
+        "label" : "SHOP MICHAEL KORS COLLECTION",
+        "className" : "caption--ctas wpCta"
+      },
+      "headline" : {
+        "label" : "EVENING ATTITUDE",
+        "className" : "caption caption__collection-1 promo--caption"
+      }
+    },
+    {
+      "type": "flagshipFullBanner",
+      "media": "//digital2.michaelkors.com/refreshes/2018/fall/refresh4/global/mobile/homepage/HP_PROMO_3.jpg",
+      "link": "/men/_/N-2861",
+      "title": "REFINED STYLE",
+      "cta": {
+        "label": "SHOP MICHAEL KORS MENS",
+        "className": "caption--ctas wpCta"
+      },
+      "headline": {
+        "label": "NOW &amp; LATER",
+        "className": "caption caption__mens-1 promo--caption"
+      }
+    },
+    {
+      "type" : "gallery",
+      "gallery" : [
+        {
+          "media" : "//digital2.michaelkors.com/refreshes/2018/fall/refresh4/global/mobile/homepage/HP_PROMO_DK_1.jpg",
+          "link" : "http://destinationkors.michaelkors.com/michaels-edit/trend-report/what-were-coveting/",
+          "title" : "WHAT WE'RE COVETING",
+          "ctaLabel" : "SEE THE TREND",
+          "label" : "See the trend: jackets and boots for a chic season ahead"
+        },
+        {
+          "media" : "//digital3.michaelkors.com/refreshes/2018/fall/refresh4/global/mobile/homepage/HP_PROMO_DK_2.jpg",
+          "link" : "http://destinationkors.michaelkors.com/michaels-edit/trend-report/what-were-coveting/",
+          "title" : "MICHAEL'S PARIS PICKS",
+          "ctaLabel" : "PLAN YOUR TRIP",
+          "label" : "Plan your trip to Paris"
+        },
+        {
+          "media" : "//digital3.michaelkors.com/refreshes/2018/fall/refresh4/global/mobile/homepage/HP_PROMO_DK_3.jpg",
+          "link" : "http://destinationkors.michaelkors.com/jet-set/plan-your-trip/paris-3/",
+          "title" : "THE DAVID DOWNTON COLLABORATION",
+          "ctaLabel" : "GET THE SCOOP",
+          "label" : "Get the scoop: the David Downton collaboration"
+        }
+      ]
+    }
+  ]
+}
