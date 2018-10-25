@@ -31,21 +31,8 @@ let bookingUrl = 'https://int-2.michaelkors.com/';
     let sectionElements = document.querySelectorAll(".mkwp");
     // get the hotel data
     sectionElements.forEach((section) => {
-      let sectionJson = {};
-      try {
-        sectionJson.name = section.querySelector('h2').innerText;
-        sectionJson.url = section.querySelector('a').href;
-        sectionJson.src = section.querySelector('.mkwp picture source[media*="767"]').srcset;
-        // hotelJson.reviews = hotelelement.querySelector('span.review-score-widget__subtext').innerText;
-        // hotelJson.rating = hotelelement.querySelector('span.review-score-badge').innerText;
-        // if (hotelelement.querySelector('strong.price')) {
-        //   hotelJson.price = hotelelement.querySelector('strong.price').innerText;
-        // }
-      }
-      catch (exception) {
-
-      }
-      sections.push(sectionJson);
+      const photoGroup = createPhotoGroup(section);
+      sections = [...sections, photoGroup]
     });
     return sections;
   });
