@@ -1,0 +1,84 @@
+[
+  {
+    "type": "flagshipFullBanner",
+    "media": "//digital.michaelkors.com/refreshes/2018/holiday/refresh2/global/mobile/homepage/HP_PROMO_1.jpg",
+    "link": "https://int-2.michaelkors.com/women/_/N-28ee",
+    "tile": "AFTER HOURS",
+    "cta": {
+      "label": "SHOP MICHAEL MICHAEL KORS",
+      "className": "type-cta-1 wpCta"
+    },
+    "headline": {
+      "label": "AFTER HOURS",
+      "className": "type-headline-mmk-1 wpHeadline type-padding-bottom"
+    },
+    "gallery": []
+  },
+  {
+    "type": "flagshipFullBanner",
+    "media": "//digital2.michaelkors.com/refreshes/2018/holiday/refresh2/global/mobile/homepage/HP_PROMO_2.jpg",
+    "link": "https://int-2.michaelkors.com/men/_/N-2861",
+    "tile": "MODERN ESSENTIALS",
+    "cta": {
+      "label": "SHOP MICHAEL KORS MENS",
+      "className": "caption--ctas wpCta"
+    },
+    "headline": {
+      "label": "MODERN ESSENTIALS",
+      "className": "type-headline-mens-1 wpHeadline"
+    },
+    "gallery": []
+  },
+  {
+    "type": "flagshipFullBanner",
+    "media": "//digital1.michaelkors.com/refreshes/2018/holiday/refresh2/global/mobile/homepage/HP_PROMO_3.jpg",
+    "link": "https://int-2.michaelkors.com/collection/_/N-3wie47",
+    "tile": "SPORTIF OPULENCE",
+    "cta": {
+      "label": "SHOP MICHAEL KORS COLLECTION",
+      "className": "caption--ctas wpCta"
+    },
+    "headline": {
+      "label": "SPORTIF OPULENCE",
+      "className": "type-headline-collection-1 wpHeadline"
+    },
+    "gallery": []
+  },
+  {
+    "type": "flagshipThreeUp",
+    "media": "//digital2.michaelkors.com/refreshes/2018/holiday/refresh2/global/mobile/homepage/HP_PROMO_DK_1.jpg",
+    "link": "https://int-2.michaelkors.com/trend/resort-2019-catalina-beach-club/_/R-cat3890007",
+    "tile": "JOIN THE CLUB",
+    "cta": {
+      "label": "THE INSPIRATION FOR RESORT",
+      "className": "caption--ctas wpCta"
+    },
+    "headline": {
+      "label": "JOIN THE CLUB",
+      "className": "wpHeadline"
+    },
+    "gallery": [
+      {
+        "media": "//digital2.michaelkors.com/refreshes/2018/holiday/refresh2/global/mobile/homepage/HP_PROMO_DK_1.jpg",
+        "link": "https://int-2.michaelkors.com/trend/resort-2019-catalina-beach-club/_/R-cat3890007",
+        "title": "JOIN THE CLUB",
+        "ctaLabel": "THE INSPIRATION FOR RESORT",
+        "label": "JOIN THE CLUB"
+      },
+      {
+        "media": "//digital3.michaelkors.com/refreshes/2018/holiday/refresh2/global/mobile/homepage/HP_PROMO_DK_2.jpg",
+        "link": "https://int-2.michaelkors.com/trend/travel-diaries-deer-valley-utah/_/R-cat3890002",
+        "title": "DESTINATION: DEER VALLEY",
+        "ctaLabel": "PLAN YOUR TRIP",
+        "label": "DESTINATION: DEER VALLEY"
+      },
+      {
+        "media": "//digital3.michaelkors.com/refreshes/2018/holiday/refresh2/global/mobile/homepage/HP_PROMO_DK_3.jpg",
+        "link": "https://int-2.michaelkors.com/trend/a-minute-with-a-model-roberto-rossellini/_/R-cat3890004",
+        "title": "THE SCOOP ON ROBERTO ROSSELLINI",
+        "ctaLabel": "READ THE INTERVIEW",
+        "label": "THE SCOOP ON ROBERTO ROSSELLINI"
+      }
+    ]
+  }
+]

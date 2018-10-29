@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const fs = require('fs');
 
 createPhotoGroup = elements => {
   // return {
@@ -47,27 +48,31 @@ let bookingUrl = "https://int-2.michaelkors.com/";
         // }
         const cta = {
           label: section.querySelector(".wpCta a").innerText,
-          className: Array.from(section.querySelector(".wpCta").classList).join(" ")
+          className: Array.from(section.querySelector(".wpCta").classList).join(
+            " "
+          )
         };
         const headline = {
           label: section.querySelector("h2").innerText,
           className: Array.from(section.querySelector("h2").classList).join(" ")
         };
-        const gallery = [];
-        // sectionElements
-        //   .querySelectorAll(".carousel .columns")
-        //   .forEach(gallery => {
-        //     const galleryItem = {
-        //       media: "//digital2.michaelkors.com/refreshes/2018/fall/refresh4/global/mobile/homepage/HP_PROMO_DK_1.jpg",
-        //       link: "http://destinationkors.michaelkors.com/michaels-edit/trend-report/what-were-coveting/",
-        //       title: "WHAT WE'RE COVETING",
-        //       ctaLabel: "SEE THE TREND",
-        //       label: "See the trend: jackets and boots for a chic season ahead"
-        //     }
-        //     gallery.push(galleryItem);
-        //   });
         sectionJson.cta = cta;
         sectionJson.headline = headline;
+        const gallery = [];
+        const promos = section
+          .querySelectorAll(".carousel .promo")
+          .forEach(item => {
+            const galleryItem = {
+              media: item.querySelector('.mkwp picture source[media*="767"]')
+                .srcset,
+              link: item.querySelector("a").href,
+              title: item.querySelector("h2").innerText,
+              ctaLabel: item.querySelector(".wpCta a").innerText,
+              label: item.querySelector('[data-icid]').dataset.icid
+            };
+            gallery.push(galleryItem);
+          });
+
         sectionJson.gallery = gallery;
       } catch (exception) {}
       sections.push(sectionJson);
@@ -75,6 +80,17 @@ let bookingUrl = "https://int-2.michaelkors.com/";
     return sections;
   });
 
-  console.dir(homePageData);
+
+  fs.writeFile(
+    "./homepage-.json",
+    JSON.stringify(homePageData, null, 2),
+    err => {
+      if (err) {
+        return console.log(err);
+      }
+      // console.log(JSON.stringify(homePageData, null, 2));
+      console.log("The file was saved!");
+    }
+  );
   await browser.close();
 })();
