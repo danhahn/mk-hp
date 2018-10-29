@@ -1,4 +1,11 @@
 {
+  "PPH" : {
+    "title" : "FREE GROUND SHIPPING & RETURNS FOR <span class=\"GothamMedium\">KORS</span>VIPS",
+    "cta" : {
+      "url" : "https://int-2.michaelkors.com/myaccount/createAccount.jsp?_requestid=14537",
+      "label" : "JOIN NOW"
+    }
+  },
   "sections" : [
     {
       "type" : "flagshipFullBanner",
