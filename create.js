@@ -1,5 +1,6 @@
 const puppeteer = require("puppeteer");
 const fs = require('fs');
+const moment = require('moment');
 
 createPhotoGroup = elements => {
   // return {
@@ -19,15 +20,28 @@ createPhotoGroup = elements => {
   return "something";
 };
 
-let bookingUrl = "https://int-2.michaelkors.com/";
+let url = "https://www.michaelkors.com/";
 (async () => {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
   await page.setViewport({ width: 1920, height: 926 });
-  await page.goto(bookingUrl);
+  await page.goto(url);
 
   // get hotel details
   let homePageData = await page.evaluate(() => {
+    const pageJson = {};
+
+    const pph = {};
+    pphData = document.querySelector(".pphMessageContent");
+    const message = pphData.innerHTML.split(".")[0];
+    pph.title = message + ".";
+    pph.cta = {
+      url: pphData.querySelector('a').href,
+      label: pphData.querySelector('a').innerText
+    }
+
+    pageJson.pph = pph;
+
     let sections = [];
     // get the hotel elements
     let sectionElements = document.querySelectorAll(".mkwp");
@@ -40,12 +54,25 @@ let bookingUrl = "https://int-2.michaelkors.com/";
           '.mkwp picture source[media*="767"]'
         ).srcset;
         sectionJson.link = section.querySelector("a").href;
-        sectionJson.tile = section.querySelector("h2").innerText;
+        sectionJson.title = section.querySelector("[class*=headline]").innerText;
         // hotelJson.reviews = hotelelement.querySelector('span.review-score-widget__subtext').innerText;
         // hotelJson.rating = hotelelement.querySelector('span.review-score-badge').innerText;
         // if (hotelelement.querySelector('strong.price')) {
         //   hotelJson.price = hotelelement.querySelector('strong.price').innerText;
         // }
+        const allCTAs = [];
+        document.querySelectorAll(".wpCta").forEach(item => {
+          const cta = {
+            label: item.querySelector("a").innerText,
+            className: Array.from(item.classList).join(" "),
+            url: item.querySelector("a").href,
+          };
+          console.log(cta)
+          allCTAs.push(cta);
+        })
+        sectionJson.links = allCTAs;
+        console.log(allCTAs);
+
         const cta = {
           label: section.querySelector(".wpCta a").innerText,
           className: Array.from(section.querySelector(".wpCta").classList).join(
@@ -77,12 +104,13 @@ let bookingUrl = "https://int-2.michaelkors.com/";
       } catch (exception) {}
       sections.push(sectionJson);
     });
-    return sections;
+    pageJson.section = sections;
+    return pageJson;
   });
 
 
   fs.writeFile(
-    "./homepage-.json",
+    `./homepage-${moment().format('M-DD-YYYY_H-mm-ss')}.json`,
     JSON.stringify(homePageData, null, 2),
     err => {
       if (err) {
