@@ -20,7 +20,8 @@ createPhotoGroup = elements => {
   return "something";
 };
 
-let url = "https://www.michaelkors.com/";
+let url = "https://int-4.michaelkors.com/";
+
 (async () => {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
@@ -108,10 +109,12 @@ let url = "https://www.michaelkors.com/";
     return pageJson;
   });
 
+  var regex = /(https:\/\/)([\w-]*)(.michaelkors.com\/)/g;
+  cleanHomepageData = JSON.stringify(homePageData, null, 2).replace(regex, '$1www$3')
 
   fs.writeFile(
     `./homepage-${moment().format('M-DD-YYYY_H-mm-ss')}.json`,
-    JSON.stringify(homePageData, null, 2),
+    cleanHomepageData,
     err => {
       if (err) {
         return console.log(err);
