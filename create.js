@@ -2,110 +2,65 @@ const puppeteer = require("puppeteer");
 const fs = require('fs');
 const moment = require('moment');
 
-createPhotoGroup = elements => {
-  // return {
-  //   type: "flagshipFullBanner",
-  //   media: "//digital.michaelkors.com/refreshes/2018/fall/refresh4/global/mobile/homepage/HP_PROMO_1.jpg",
-  //   link: "/women/_/N-28ee",
-  //   title: "DARK GLAMOUR",
-  //   cta: {
-  //     label: "SHOP MICHAEL MICHAEL KORS",
-  //     className: "type-cta-1 wpCta"
-  //   },
-  //   headline: {
-  //     label: "DARK GLAMOUR",
-  //     className: "type-headline-mmk-1 wpHeadline type-padding-bottom"
-  //   }
-  // }
-  return "something";
-};
-
-let url = "https://int-4.michaelkors.com/";
+let url = "https://www.michaelkors.com/";
 
 (async () => {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
-  await page.setViewport({ width: 1920, height: 926 });
+  await page.setViewport({ width: 1200, height: 500 });
   await page.goto(url);
 
   // get hotel details
   let homePageData = await page.evaluate(() => {
-    const pageJson = {};
-
-    const pph = {};
-    pphData = document.querySelector(".pphMessageContent");
-    const message = pphData.innerHTML.split(".")[0];
-    pph.title = message + ".";
-    pph.cta = {
-      url: pphData.querySelector('a').href,
-      label: pphData.querySelector('a').innerText
+    let pageObj = {}
+    let pageJson = {
+      items: [pageObj]
+    };
+    const topBannerDOM = document.querySelector('.flagshipSaleBanner');
+    const topBanner = {
+      "banner_url": topBannerDOM.querySelector('a').href,
+      "banner_img": `https:${topBannerDOM.querySelector('[srcset*=mobile]').srcset}`,
+      "banner_img_height": "358",
+      "banner_img_width": "388",
+      "caption--headline": topBannerDOM.querySelector('h2').textContent.trim(),
+      "font_family": "Caslon",
+      "font_weight": "italic",
+      "captio_text": topBannerDOM.querySelector('.caption--text').textContent.trim(),
+      "caption_ctas": [...topBannerDOM.querySelectorAll('.wpCta:not(.hide-tablet-only) a')].map(item => {
+        return {
+          "cta_text": item.textContent,
+          "cta_url": item.href
+        }
+      }),
+      "bottom_line-text": topBannerDOM.querySelector('.promo--legal').innerHTML.split('<')[0].trim(),
+      "bottom_line_url_text": topBannerDOM.querySelector('.promo--legal a').textContent.trim(),
+      "bottom_line_url": topBannerDOM.querySelector('.promo--legal a').href
     }
-
-    pageJson.pph = pph;
-
-    let sections = [];
-    // get the hotel elements
-    let sectionElements = document.querySelectorAll(".mkwp");
-    // get the hotel data
-    sectionElements.forEach(section => {
-      let sectionJson = {};
-      try {
-        sectionJson.type = section.querySelector(".mkwp--wrapper").classList[3];
-        sectionJson.media = section.querySelector(
-          '.mkwp picture source[media*="767"]'
-        ).srcset;
-        sectionJson.link = section.querySelector("a").href;
-        sectionJson.title = section.querySelector("[class*=headline]").innerText;
-        // hotelJson.reviews = hotelelement.querySelector('span.review-score-widget__subtext').innerText;
-        // hotelJson.rating = hotelelement.querySelector('span.review-score-badge').innerText;
-        // if (hotelelement.querySelector('strong.price')) {
-        //   hotelJson.price = hotelelement.querySelector('strong.price').innerText;
-        // }
-        const allCTAs = [];
-        document.querySelectorAll(".wpCta").forEach(item => {
-          const cta = {
-            label: item.querySelector("a").innerText,
-            className: Array.from(item.classList).join(" "),
-            url: item.querySelector("a").href,
-          };
-          console.log(cta)
-          allCTAs.push(cta);
-        })
-        sectionJson.links = allCTAs;
-        console.log(allCTAs);
-
-        const cta = {
-          label: section.querySelector(".wpCta a").innerText,
-          className: Array.from(section.querySelector(".wpCta").classList).join(
-            " "
-          )
-        };
-        const headline = {
-          label: section.querySelector("h2").innerText,
-          className: Array.from(section.querySelector("h2").classList).join(" ")
-        };
-        sectionJson.cta = cta;
-        sectionJson.headline = headline;
-        const gallery = [];
-        const promos = section
-          .querySelectorAll(".carousel .promo")
-          .forEach(item => {
-            const galleryItem = {
-              media: item.querySelector('.mkwp picture source[media*="767"]')
-                .srcset,
-              link: item.querySelector("a").href,
-              title: item.querySelector("h2").innerText,
-              ctaLabel: item.querySelector(".wpCta a").innerText,
-              label: item.querySelector('[data-icid]').dataset.icid
-            };
-            gallery.push(galleryItem);
-          });
-
-        sectionJson.gallery = gallery;
-      } catch (exception) {}
-      sections.push(sectionJson);
+    const richContent = [...document.querySelectorAll('.mkwp[id]')].map(item => {
+      return {
+        "mmk_url": item.querySelector('a').href,
+        "mmk_img": item.querySelector("[srcset *= 'mobile']").srcset,
+        "mmk_img_width": "320",
+        "mmk_img_height": "320",
+        "mmk_Headline": item.querySelector('.caption--headline').textContent.trim(),
+        "font_family": [...item.querySelector('.caption').classList].join(' '),
+        "mmk_subtext": item.querySelector('.caption--headline + div').textContent.trim()
+      }
     });
-    pageJson.section = sections;
+    const slider = [...document.querySelector('.carousel').querySelectorAll('figure.promo')].map(item => {
+      return {
+        "slider_img": item.querySelector("[srcset *= 'mobile']").srcset,
+        "slider_img_height": "320",
+        "slider_img_width": "320",
+        "slider_caption": item.querySelector('.caption--ctas').textContent.trim(),
+        "slider_url": item.querySelector('a').href,
+        "slider_text": item.querySelector('.wpHeadline').textContent.trim()
+      }
+    });
+    pageObj['top_banner'] = [topBanner];
+    pageObj['rich_content'] = richContent;
+    pageObj['slider'] = slider;
+    pageObj['slider_item_count'] = slider.length;
     return pageJson;
   });
 
@@ -123,5 +78,6 @@ let url = "https://int-4.michaelkors.com/";
       console.log("The file was saved!");
     }
   );
+  console.log(JSON.stringify(homePageData, null, 2));
   await browser.close();
 })();
