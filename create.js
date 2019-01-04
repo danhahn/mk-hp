@@ -42,19 +42,20 @@ let url = "https://www.michaelkors.com/";
         "mmk_img": item.querySelector("[srcset *= 'mobile']").srcset,
         "mmk_img_width": Math.round(item.querySelector('img').getBoundingClientRect().width),
         "mmk_img_height": Math.round(item.querySelector('img').getBoundingClientRect().height),
-        "mmk_Headline": item.querySelector('.caption--headline').textContent.trim(),
-        "font_family": [...item.querySelector('.caption').classList].join(' '),
-        "mmk_subtext": item.querySelector('.caption--headline + div').textContent.trim()
+        "mmk_Headline": item.querySelector('.wpHeadline').textContent.trim(),
+        "font_family": [...item.querySelector('.wpHeadline').classList].join(' '),
+        "mmk_subtext": item.querySelector('.wpCta').textContent.trim()
       }
     });
-    const slider = [...document.querySelector('.carousel').querySelectorAll('figure.promo')].map(item => {
+    const slider = [...document.querySelector('.carousel').querySelectorAll('figure.promo')].map((item, index) => {
       return {
         "slider_img": item.querySelector("[srcset *= 'mobile']").srcset,
         "slider_img_height": Math.round(item.querySelector('img').getBoundingClientRect().height),
         "slider_img_width": Math.round(item.querySelector('img').getBoundingClientRect().width),
         "slider_caption": item.querySelector('.caption--ctas').textContent.trim(),
         "slider_url": item.querySelector('a').href,
-        "slider_text": item.querySelector('.wpHeadline').textContent.trim()
+        "slider_text": item.querySelector('.wpHeadline').textContent.trim(),
+        "index": index - 1
       }
     }).slice(1, -1);
     pageObj['top_banner'] = [topBanner];
